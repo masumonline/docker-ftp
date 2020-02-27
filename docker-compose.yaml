@@ -1,0 +1,22 @@
+version: '2'
+
+networks: 
+  intranet:
+
+services: 
+  ftp:
+    image: stilliard/pure-ftpd
+    ports:
+      - "2121:21"
+      - "30000-30009:30000-30009"
+    tty: true
+    volumes:
+      - ./src:/home/theuser
+    environment: 
+        FTP_USER_NAME: theuser
+        FTP_USER_PASS: masumonline
+        FTP_USER_HOME: /home/theuser
+        FTP_MAX_CLIENTS: 5
+    restart: always
+    networks:
+      - intranet
